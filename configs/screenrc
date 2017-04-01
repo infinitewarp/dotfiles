@@ -1,0 +1,24 @@
+# Disable the startup message
+startup_message off
+
+# Set a large scrollback buffer
+defscrollback 32000
+
+# Always start `screen` with UTF-8 enabled (`screen -U`)
+defutf8 on
+
+# Ensure proper color mode
+term screen-256color
+
+# say "beep" instead of something dumb like "Wuff, Wuff!!"
+vbell_msg "beep"
+
+# Useful status line
+hardstatus on
+hardstatus alwayslastline
+hardstatus string '[ %{Y}%H %{g}][%{W}%= %?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{W}%?%+Lw%?%?%= %{g}][ %{G}%l%{g} ][%{Y} %D %d %M %Y %C%a %{g}]'
+caption always
+
+# Easier to remember screen navigation
+bindkey ^, prev
+bindkey ^. next

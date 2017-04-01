@@ -1,0 +1,18 @@
+# Compiled Python files
+*.py[cod]
+
+# macOS folder metadata
+.DS_Store
+
+# macOS file forks and metadata
+._*
+
+# macOS folders that may appear at disk root
+.Spotlight-V100
+.Trashes
+
+# Common SQLite dev db name
+dev.db
+
+# JetBrains projects
+.idea
