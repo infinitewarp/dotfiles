@@ -113,6 +113,11 @@
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
 
+[pull]
+
+	# Make `git pull` rebase your commits over the remote commits.
+	rebase = true
+
 [push]
 
 	# Make `git push` push relevant annotated tags when pushing branches out.
