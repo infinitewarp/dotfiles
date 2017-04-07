@@ -45,6 +45,7 @@ brew install htop
 brew install httpie
 brew install ssh-copy-id
 brew install tree
+brew install jq
 
 # Cask install various third-party packages
 
