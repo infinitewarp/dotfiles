@@ -68,6 +68,7 @@ brew cask install inkscape
 brew cask install vlc
 
 # misc
+brew cask install dnscrypt
 brew cask install flux
 brew cask install osxfuse
 brew cask install the-unarchiver
