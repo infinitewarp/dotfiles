@@ -13,7 +13,7 @@ function set_prompts() {
 
         [ -n "$VIRTUAL_ENV" ] || return  # virtual env not found
         local venv="${VIRTUAL_ENV##*/}"  # strip out the path and just leave the env name
-        echo -e "${1}${PYTHON_VENV_SYMBOL}${venv}";
+        echo -e "${1}${PYTHON_VENV_SYMBOL}${venv}"
     }
 
     function prompt_git() {
@@ -44,7 +44,7 @@ function set_prompts() {
             [ -n "$aheadN" ] && marks+="$GIT_NEED_PUSH_SYMBOL$aheadN"
             [ -n "$behindN" ] && marks+="$GIT_NEED_PULL_SYMBOL$behindN"
 
-            [ -n "${marks}" ] && marks="[${marks}]";
+            [ -n "${marks}" ] && marks="[${marks}]"
 
             # print the git branch segment without a trailing newline
             echo -e "${1}${branch}${marks} "
@@ -75,18 +75,18 @@ function set_prompts() {
         bold=$(tput bold)
         reset=$(tput sgr0)
 
-        black=$(tput setaf 0);
-        blue=$(tput setaf 4);
-        cyan=$(tput setaf 6);
-        green=$(tput setaf 2);
-        light_purple=$(tput setaf 61);
-        orange=$(tput setaf 9);
-        magenta=$(tput setaf 5);
-        purple=$(tput setaf 125);
-        red=$(tput setaf 1);
-        violet=$(tput setaf 13);
-        white=$(tput setaf 15);
-        yellow=$(tput setaf 3);
+        black=$(tput setaf 0)
+        blue=$(tput setaf 4)
+        cyan=$(tput setaf 6)
+        green=$(tput setaf 2)
+        light_purple=$(tput setaf 61)
+        orange=$(tput setaf 9)
+        magenta=$(tput setaf 5)
+        purple=$(tput setaf 125)
+        red=$(tput setaf 1)
+        violet=$(tput setaf 13)
+        white=$(tput setaf 15)
+        yellow=$(tput setaf 3)
     else
         bold=""
         reset="\e[0m"
@@ -132,7 +132,7 @@ function set_prompts() {
     PS1+="\[$white\]: "
     PS1+="\[$green\]\w" # working directory
     PS1+="\$(prompt_git \"$white on $cyan\")" # git repository details
-    PS1+="\$(prompt_virtualenv \"$white using $magenta\")"; # python virtualenv details
+    PS1+="\$(prompt_virtualenv \"$white using $magenta\")" # python virtualenv details
     PS1+="\n"
     PS1+="\[$white\]$shellSymbol \[$reset\]" # $ (and reset color)
 
