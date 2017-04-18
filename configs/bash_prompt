@@ -47,7 +47,7 @@ function set_prompts() {
             [ -n "${marks}" ] && marks="[${marks}]"
 
             # print the git branch segment without a trailing newline
-            echo -e "${1}${branch}${marks} "
+            echo -e "${1}${branch}${marks}"
 
         else
             return
