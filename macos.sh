@@ -410,6 +410,9 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # Prefer plain-text emails
 defaults write com.apple.mail PreferPlainText -bool true
 
+# Disable automatic loading of remote content in emails
+defaults write ~/Library/Preferences/com.apple.mail-shared DisableURLLoading -bool true
+
 ###############################################################################
 # Spotlight                                                                   #
 ###############################################################################
