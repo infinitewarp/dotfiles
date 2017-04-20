@@ -26,6 +26,9 @@ brew install wget --with-iri
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
 
+# Install more recent less with better utf-8 support (e.g. emoji in git commit messages)
+brew install less
+
 # XQuartz is an implicit prerequisite for some packages (e.g. xpdf)
 brew cask install xquartz
 
