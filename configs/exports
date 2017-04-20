@@ -19,6 +19,6 @@ export LC_ALL='en_US.UTF-8';
 # Highlight section titles in manual pages.
 export LESS_TERMCAP_md="${yellow}";
 
-# After each command, append to the history file and reread it.
-export PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
+# After each command, append to the history file (but don't reread it).
+export PROMPT_COMMAND="history -a; ${PROMPT_COMMAND}"
 
