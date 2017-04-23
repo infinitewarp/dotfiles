@@ -14,6 +14,12 @@ Alternatively, to update while avoiding the confirmation prompt:
 set -- -f; source install.sh
 ```
 
+
+### Warnings and Errors around Xcode
+
+If you run `install.sh` on a newly imaged Mac, `brew` commands may report errors about the version of Xcode and skip some package installations. You will need to manually install and update to the latest version of Xcode using the App Store, and then rerun the `install.sh` command.
+
+
 ### Add local customizations
 
 If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a custom commands without the need to fork this repository or to add commands you don't want to commit to a public repository.
