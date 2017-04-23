@@ -20,9 +20,6 @@ brew upgrade
 # Handy bash completion helper
 brew install bash-completion
 
-# Install `wget` with IRI support.
-brew install wget --with-iri
-
 # Install more recent versions of some macOS tools.
 brew install vim --with-override-system-vi
 
@@ -49,6 +46,7 @@ brew install httpie
 brew install ssh-copy-id
 brew install tree
 brew install jq
+brew install wget
 
 # Cask install various third-party packages
 
