@@ -72,6 +72,7 @@ brew cask install vlc
 brew cask install dnscrypt
 brew cask install flux
 brew cask install osxfuse
+brew cask install spectacle
 brew cask install the-unarchiver
 brew cask install veracrypt
 brew cask install yujitach-menumeters
