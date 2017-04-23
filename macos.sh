@@ -607,14 +607,14 @@ rsync -avh --no-perms ./configs/Preferences.sublime-settings "$sublime_text_pref
 # MenuMeters.prefPane
 ###############################################################################
 
-defaults com.ragingmenace.MenuMeters write "com.ragingmenace.MenuMeterDisk" -bool false
-defaults com.ragingmenace.MenuMeters write "com.ragingmenace.MenuMeterMem" -bool false
-defaults com.ragingmenace.MenuMeters write "com.ragingmenace.MenuMeterCPU" -bool true
-defaults com.ragingmenace.MenuMeters write "com.ragingmenace.MenuMeterNet" -bool true
-defaults com.ragingmenace.MenuMeters write CPUDisplayMode -int 2
-defaults com.ragingmenace.MenuMeters write CPUGraphLength -int 11
-defaults com.ragingmenace.MenuMeters write NetDisplayMode -int 6
-defaults com.ragingmenace.MenuMeters write NetGraphStyle -int 0
+defaults write com.ragingmenace.MenuMeters "com.ragingmenace.MenuMeterDisk" -bool false
+defaults write com.ragingmenace.MenuMeters "com.ragingmenace.MenuMeterMem" -bool false
+defaults write com.ragingmenace.MenuMeters "com.ragingmenace.MenuMeterCPU" -bool true
+defaults write com.ragingmenace.MenuMeters "com.ragingmenace.MenuMeterNet" -bool true
+defaults write com.ragingmenace.MenuMeters CPUDisplayMode -int 2
+defaults write com.ragingmenace.MenuMeters CPUGraphLength -int 11
+defaults write com.ragingmenace.MenuMeters NetDisplayMode -int 6
+defaults write com.ragingmenace.MenuMeters NetGraphStyle -int 0
 
 ###############################################################################
 # Kill affected applications                                                  #
