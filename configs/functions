@@ -36,7 +36,9 @@ function tre() {
 }
 
 # Recursively strip trailing whitespace from common files under the current
-# directory, ignoring anything that might be in the .git repo directory.
+# directory, ignoring anything that might be in the .git repo directory or
+# the .tox working directory.
 function stripws() {
-    find . -type f | grep -v -E '^\.git' | grep -E '\.(txt|cfg|py|md|ini|sh)$' | xargs -n 1 perl -i -lpe 's/\s*$//';
+    [[ -z $1 ]] && DIR=. || DIR=$1
+    find $DIR -name .git -o -name .tox -prune -o -type f | grep -E '\.(txt|cfg|py|md|ini|sh)$' | xargs -n 1 perl -i -lpe 's/\s*$//';
 }
