@@ -122,3 +122,8 @@
 
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
+
+[rebase]
+
+	# More verbose list message for interactive rebasing.
+	instructionFormat = [%an @ %ar] %s
