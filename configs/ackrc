@@ -1,0 +1,10 @@
+# ignore scratch/build
+--ignore-dir=.tox
+--ignore-dir=.cache
+
+# ignore source control files
+--ignore-dir=.git
+--ignore-dir=.hg
+
+# ignore IDE files
+--ignore-dir=.idea

@@ -24,6 +24,9 @@ function dotfiles() {
     rcopy "configs/functions" ~/.functions
     rcopy "configs/inputrc" ~/.inputrc
 
+    # ack (is better than grep)
+    rcopy "configs/ackrc" ~/.ackrc
+
     # curl
     rcopy "configs/curlrc" ~/.curlrc
 
