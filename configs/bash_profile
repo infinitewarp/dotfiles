@@ -35,6 +35,11 @@ complete -W "NSGlobalDomain" defaults;
 # Add `killall` tab completion for common apps
 complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
 
+# Add bin directory for Brew-installed version of Python2 to path
+if which brew &> /dev/null && [ "$(which python2)" == "$(brew --prefix)/bin/python2" ]; then
+	export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
+fi;
+
 # Add support for Python virtualenvwrapper
 if which brew &> /dev/null && [ -f "$(brew --prefix)/bin/virtualenvwrapper.sh" ]; then
 	source "$(brew --prefix)/bin/virtualenvwrapper.sh";
