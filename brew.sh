@@ -32,7 +32,8 @@ brew cask install xquartz
 # # Install some CTF tools; see https://github.com/ctfs/write-ups.
 # brew install nmap
 # brew install pngcheck
-brew install xpdf
+# brew install xpdf  # Note: Instead of xpdf, let's try poppler.
+brew install poppler
 
 # Install modern Python for development
 brew install python
