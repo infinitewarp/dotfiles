@@ -4,7 +4,7 @@ export PATH="$HOME/bin:$PATH";
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{path,exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -47,3 +47,6 @@ fi;
 
 # Keep unhiding ~/Library because Apple likes to re-hide it with OS updates
 [ "$(uname)" == "Darwin" ] && chflags nohidden ~/Library
+
+# Load custom prompt *last* for better handling of last command result
+[ -r ~/.bash_prompt ] && [ -f ~/.bash_prompt ] && source ~/.bash_prompt
