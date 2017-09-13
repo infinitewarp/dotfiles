@@ -38,6 +38,9 @@ function dotfiles() {
     rcopy "configs/gitconfig" ~/.gitconfig
     rcopy "configs/gitignore" ~/.gitignore
 
+    # python
+    rcopy "configs/pystartup.py" ~/.pystartup.py
+
     # screen
     rcopy "configs/screenrc" ~/.screenrc
 
