@@ -79,4 +79,4 @@ brew cask install veracrypt
 brew cask install yujitach-menumeters
 
 # Remove outdated versions from the cellar.
-brew cleanup
+brew cleanup --prune=7
