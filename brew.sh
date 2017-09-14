@@ -87,5 +87,11 @@ brew cask install the-unarchiver
 brew cask install veracrypt
 brew cask install yujitach-menumeters
 
+# "nerd fonts" for extended glyphs in terminals
+# see: https://github.com/ryanoasis/nerd-fonts
+# and: https://github.com/ryanoasis/powerline-extra-symbols
+brew tap caskroom/fonts
+brew cask install font-dejavusansmono-nerd-font
+
 # Remove outdated versions from the cellar.
 brew cleanup --prune=7

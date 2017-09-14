@@ -5,16 +5,15 @@
 
 # Color ref: https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
 # Color ref: http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
+# Special font symbol ref: https://nerdfonts.com/#cheat-sheet
 # More tips: http://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html
 
 function set_prompts() {
 
     function prompt_virtualenv() {
-        readonly PYTHON_VENV_SYMBOL='⚕'
-
         [ -n "$VIRTUAL_ENV" ] || return  # virtual env not found
         local venv="${VIRTUAL_ENV##*/}"  # strip out the path and just leave the env name
-        echo -e "${1}${PYTHON_VENV_SYMBOL}${venv}"
+        echo -e "${1}${venv}"
     }
 
     function prompt_git() {
@@ -56,10 +55,8 @@ function set_prompts() {
     }
 
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        tput sgr0 # reset colors
-
-        readonly BOLD=$(tput bold)
         readonly RESET=$(tput sgr0)
+        readonly BOLD=$(tput bold)
 
         readonly FG_BLACK=$(tput setaf 0)
         readonly FG_RED=$(tput setaf 1)
@@ -75,8 +72,8 @@ function set_prompts() {
         readonly FG_VIOLET=$(tput setaf 201)
         readonly FG_PURPLE=$(tput setaf 128)
     else
-        readonly BOLD=""
         readonly RESET="\e[0m"
+        readonly BOLD=""
 
         readonly FG_BLACK="\e[1;30m"
         readonly FG_RED="\e[1;31m"
@@ -91,6 +88,14 @@ function set_prompts() {
         readonly FG_ORANGE="\e[38;5;208m"
         readonly FG_VIOLET="\e[38;5;201m"
         readonly FG_PURPLE="\e[38;5;128m"
+    fi
+
+    if fc-list | grep "DejaVuSansMono Nerd Font" >> /dev/null; then
+        readonly SYMBOL_BRANCH=""
+        readonly SYMBOL_PYTHON=""
+    else
+        readonly SYMBOL_BRANCH="☇"
+        readonly SYMBOL_PYTHON="⚕"
     fi
 
     # build the prompt
@@ -123,16 +128,16 @@ function set_prompts() {
         # set the terminal title to the current working directory
         PS1="\[\033]0;\w\007\]"
 
-        PS1+="\n\[${BOLD}\]" # newline and embolden everything to come
+        PS1+="\n\[${RESET}\]\[${BOLD}\]" # newline and embolden everything to come
         PS1+="\[${USER_STYLE}\]\u" # username
         PS1+="\[${FG_WHITE}\]@"
         PS1+="\[${HOST_STYLE}\]\h" # host
         PS1+="\[${FG_WHITE}\]: "
         PS1+="\[${FG_GREEN}\]\w" # working directory
-        PS1+="\$(prompt_git \"${FG_WHITE} on ${FG_CYAN}\")" # git repository details
-        PS1+="\$(prompt_virtualenv \"${FG_WHITE} using ${FG_MAGENTA}\")" # python virtualenv details
+        PS1+="\$(prompt_git \" ${FG_CYAN}${SYMBOL_BRANCH}:\")" # git repository details
+        PS1+="\$(prompt_virtualenv \" ${FG_MAGENTA}${SYMBOL_PYTHON}:\")" # python virtualenv details
         PS1+="\n"
-        PS1+="${STATUS_SHELL} \[$RESET\]" # $ (and reset color)
+        PS1+="${STATUS_SHELL} \[${RESET}\]" # $ (and reset color)
 
         PS2="\[${YELLOW}\]→ \[${RESET}\]"
     }

@@ -20,7 +20,8 @@
 		".git",
 		"node_modules"
 	],
-	"font_face": "Menlo",
+	// "font_face": "Menlo",
+	"font_face": "DejaVuSansMono Nerd Font",
 	"font_size": 16,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
