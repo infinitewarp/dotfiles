@@ -17,6 +17,15 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
+# Get newer bash because macOS default is woefully out of date.
+brew install bash
+# The new bash needs some trickery to make it available.
+if [ -f "$(brew --prefix)/bin/bash" ]; then
+    grep "$(brew --prefix)/bin/bash" /etc/shells || \
+        sudo sh -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
+    sudo chsh -s "$(brew --prefix)/bin/bash" "$USER"
+fi
+
 # Handy bash completion helper
 brew install bash-completion
 
