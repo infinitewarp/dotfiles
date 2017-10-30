@@ -40,6 +40,9 @@ function dotfiles() {
 
     # python
     rcopy "configs/pystartup.py" ~/.pystartup.py
+    # python matplotlib
+    mkdir -p ~/.matplotlib
+    rcopy "configs/matplotlibrc" ~/.matplotlib/matplotlibrc
 
     # screen
     rcopy "configs/screenrc" ~/.screenrc
