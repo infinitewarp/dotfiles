@@ -54,6 +54,7 @@ brew install git
 brew install htop
 brew install httpie
 brew install ssh-copy-id
+brew install the_silver_searcher
 brew install tree
 brew install jq
 brew install wget
