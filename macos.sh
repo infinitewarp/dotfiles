@@ -474,7 +474,12 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 defaults write com.apple.terminal ShowLineMarks -int 0
 
 # Use a more legible font in iTerm
-/usr/libexec/PlistBuddy -c "Set :New\ Bookmarks:0:Normal\ Font Menlo-Regular\ 14" ~/Library/Preferences/com.googlecode.iterm2.plist
+if fc-list | grep "DejaVuSansMono Nerd Font" >> /dev/null; then
+    ITERMFONT="DejaVuSansMonoNerdFontC-Book\ 15"
+else
+    ITERMFONT="Menlo-Regular\ 14"
+fi
+/usr/libexec/PlistBuddy -c "Set :New\ Bookmarks:0:Normal\ Font ${ITERMFONT}" ~/Library/Preferences/com.googlecode.iterm2.plist
 
 
 ###############################################################################
