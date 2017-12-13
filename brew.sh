@@ -66,12 +66,15 @@ brew cask install firefox
 brew cask install google-chrome
 brew cask install slack
 
+# IRC client
+brew install irssi
+
 # development
 brew cask install docker
 brew install docker-compose
 brew cask install iterm2
 #brew cask install pycharm-ce
-#brew cask install sublime-text
+brew cask install sublime-text
 
 ## media
 #brew cask install handbrake
