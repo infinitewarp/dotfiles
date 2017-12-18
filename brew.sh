@@ -68,6 +68,7 @@ brew cask install slack
 
 # development
 brew cask install docker
+brew install docker-compose
 brew cask install iterm2
 brew cask install pycharm-ce
 brew cask install sublime-text
