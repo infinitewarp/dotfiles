@@ -156,6 +156,12 @@ sudo systemsetup -settimezone "America/New_York" > /dev/null
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 5
 
+
+# Set lock and screen saver message
+LOCK_MESSAGE="Property of Brad Smith\nIf found, please contact\nbradster@infinitewarp.com"
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "${LOCK_MESSAGE}"
+defaults write ~/Library/Preferences/ByHost/com.apple.ScreenSaver.Basic MESSAGE "${LOCK_MESSAGE}"
+
 # Save screenshots to the desktop
 defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
