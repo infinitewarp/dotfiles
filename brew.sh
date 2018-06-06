@@ -51,6 +51,7 @@ brew install python3
 # Install other useful binaries.
 brew install ack
 brew install git
+brew install gpg
 brew install htop
 brew install httpie
 brew install ssh-copy-id
