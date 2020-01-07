@@ -1,6 +1,16 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
+# Check only once if brew is installed, and save the result.
+# Check this at the start *before* other dotfiles to they can use it.
+if which brew &> /dev/null; then
+	export BREW_INSTALLED=1
+	export BREW_PREFIX="$(brew --prefix)"
+else
+	unset BREW_INSTALLED
+	unset BREW_PREFIX
+fi
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
@@ -18,35 +28,47 @@ shopt -s histappend;
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
 
-# Add tab completion for many Bash commands
-if which brew &> /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-	source "$(brew --prefix)/etc/bash_completion";
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
-fi;
+EXTRA_BASH_COMPLETION=0  # loading all completions slows shell startup
+if [[ $EXTRA_BASH_COMPLETION -eq 1 ]]; then
+	# Add tab completion for many Bash commands
+	if [[ $BREW_INSTALLED ]] && [ -f "${BREW_PREFIX}/etc/bash_completion" ]; then
+		source "${BREW_PREFIX}/etc/bash_completion";
+	elif [ -f /etc/bash_completion ]; then
+		source /etc/bash_completion;
+	fi;
 
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+	# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
+	[ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
+	# Add tab completion for `defaults read|write NSGlobalDomain`
+	# You could just use `-g` instead, but I like being explicit
+	complete -W "NSGlobalDomain" defaults;
 
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+	# Add `killall` tab completion for common apps
+	complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall;
+fi
 
-# Add bin directory for Brew-installed version of Python2 to path
-if which brew &> /dev/null && [ "$(which python2)" == "$(brew --prefix)/bin/python2" ]; then
-	export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
+# Add bin directory for Brew-installed version of Python to path
+if [[ $BREW_INSTALLED ]] && [ "$(which python)" == "${BREW_PREFIX}/bin/python" ]; then
+	export PATH="${BREW_PREFIX}/opt/python/libexec/bin:$PATH"
 fi;
 
 # Add support for Python virtualenvwrapper
-if which brew &> /dev/null && [ -f "$(brew --prefix)/bin/virtualenvwrapper.sh" ]; then
-	source "$(brew --prefix)/bin/virtualenvwrapper.sh";
+if [[ $BREW_INSTALLED ]] && [ -f "${BREW_PREFIX}/bin/virtualenvwrapper.sh" ]; then
+	source "${BREW_PREFIX}/bin/virtualenvwrapper.sh";
+ elif [ -f "/Users/brasmith/Library/Python/3.7/bin/virtualenvwrapper.sh" ]; then
+     source /Users/brasmith/Library/Python/3.7/bin/virtualenvwrapper.sh
 fi;
 
 # Keep unhiding ~/Library because Apple likes to re-hide it with OS updates
 [ "$(uname)" == "Darwin" ] && chflags nohidden ~/Library
 
 # Load custom prompt *last* for better handling of last command result
-[ -r ~/.bash_prompt ] && [ -f ~/.bash_prompt ] && source ~/.bash_prompt
+if which powerline-shell &> /dev/null; then
+  function _update_ps1() {
+      PS1=$(powerline-shell $?)
+  }
+  if [[ $TERM != linux && $(which powerline-shell) && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+      PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+  fi
+fi
