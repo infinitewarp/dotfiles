@@ -9,6 +9,7 @@ fi
 if [[ $(which pip) == "$(brew --prefix)/opt/python/libexec/bin/pip" ]] &> /dev/null; then
 	pip install -U --user pip
 	pip install -U --user virtualenvwrapper virtualenv
+	pip install -U --user powerline-shell
 else
 	echo "python must be installed by brew"
 	exit 1
