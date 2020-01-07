@@ -15,19 +15,19 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Halve the system beep volume
-defaults write com.apple.systemsound com.apple.sound.beep.volume -float 0.6065306663513184
+# Unfortunately, these seem to have no effect as of 10.14:
+defaults write com.apple.systemsound com.apple.sound.beep.volume -float 0.6065307
+defaults write NSGlobalDomain com.apple.sound.beep.volume -float 0.6065307
 
 # Set menu bar
 defaults write com.apple.systemuiserver menuExtras -array \
-    "/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu" \
     "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-    "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-    "/System/Library/CoreServices/Menu Extras/Clock.menu"
+    "/System/Library/CoreServices/Menu Extras/Battery.menu"
 
-# Better format for menu clock
-defaults write com.apple.menuextra.clock DateFormat "EEE H:mm:ss"
-defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
-defaults write com.apple.menuextra.clock IsAnalog -bool false
+# Better format for menu clock. (skipped because I'm using itsycal)
+# defaults write com.apple.menuextra.clock DateFormat "EEE H:mm:ss"
+# defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+# defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 # Hide the AirPlay menu
 defaults write com.apple.airplay showInMenuBarIfPresent -bool false
@@ -401,7 +401,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 #defaults write com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
 
 # Enable “Do Not Track”
-defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+# defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
 
 # Update extensions automatically
 defaults write com.apple.Safari InstallExtensionUpdatesAutomatically -bool true
@@ -481,7 +481,7 @@ defaults write com.apple.terminal ShowLineMarks -int 0
 
 # Use a more legible font in iTerm
 if fc-list | grep "DejaVuSansMono Nerd Font" >> /dev/null; then
-    ITERMFONT="DejaVuSansMonoNerdFontC-Book\ 15"
+    ITERMFONT="DejaVuSansMonoNerdFontC-Book\ 16"
 else
     ITERMFONT="Menlo-Regular\ 14"
 fi
@@ -610,9 +610,9 @@ defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault
 ###############################################################################
 
 # Install Sublime Text settings
-sublime_text_prefs="/Users/${USER}/Library/Application Support/Sublime Text 3/Packages/User/"
-mkdir -p "$sublime_text_prefs"
-rsync -avh --no-perms ./configs/Preferences.sublime-settings "$sublime_text_prefs"
+# sublime_text_prefs="/Users/${USER}/Library/Application Support/Sublime Text 3/Packages/User/"
+# mkdir -p "$sublime_text_prefs"
+# rsync -avh --no-perms ./configs/Preferences.sublime-settings "$sublime_text_prefs"
 
 ###############################################################################
 # MenuMeters.prefPane
