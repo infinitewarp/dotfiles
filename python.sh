@@ -6,18 +6,10 @@ if [[ ! -z "$VIRTUAL_ENV" ]]; then
 fi
 
 
-if [[ $(which pip2) == "$(brew --prefix)/bin/pip2" ]] &> /dev/null; then
-	pip2 install -U pip
-	pip2 install -U virtualenvwrapper virtualenv
+if [[ $(which pip) == "$(brew --prefix)/opt/python/libexec/bin/pip" ]] &> /dev/null; then
+	pip install -U --user pip
+	pip install -U --user virtualenvwrapper virtualenv pipenv
 else
 	echo "python must be installed by brew"
-	exit 1
-fi
-
-
-if [[ $(which pip3) == "$(brew --prefix)/bin/pip3" ]] &> /dev/null; then
-	pip3 install -U pip
-else
-	echo "python3 must be installed by brew"
 	exit 1
 fi
