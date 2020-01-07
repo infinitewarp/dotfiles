@@ -38,53 +38,50 @@ brew install less
 # XQuartz is an implicit prerequisite for some packages (e.g. xpdf)
 brew cask install xquartz
 
-# # Install some CTF tools; see https://github.com/ctfs/write-ups.
-# brew install nmap
-# brew install pngcheck
-# brew install xpdf  # Note: Instead of xpdf, let's try poppler.
-brew install poppler
-
 # Install modern Python for development
 brew install python
-brew install python3
 
-# Install other useful binaries.
-brew install ack
+# Various useful binaries.
+brew install coreutils  # GNU versions of many built-ins
+brew install findutils  # GNU versions of find, locate, updatedb, xargs
+brew install expect
 brew install git
-brew install gpg
+brew install gnupg
 brew install htop
 brew install httpie
+brew install pipenv
+brew install pstree
+brew install pv
+brew install socat  # netcat on steroids
 brew install ssh-copy-id
-brew install the_silver_searcher
+brew install telnet
+brew install the_silver_searcher  # faster than ack
 brew install tree
 brew install jq
+brew install watch
 brew install wget
 
 # Cask install various third-party packages
 
 ## internet
 brew cask install firefox
-brew cask install google-chrome
+# install "ungoogled" eloston-chromium instead of google-chrome
+brew cask fetch eloston-chromium && brew cask install eloston-chromium
 brew cask install slack
 
 # development
 brew cask install docker
 brew install docker-compose
 brew cask install iterm2
-brew cask install pycharm-ce
-brew cask install sublime-text
 brew cask install suspicious-package
+brew cask install vscodium
 
 ## media
-brew cask install handbrake
 brew cask install imagealpha
 brew cask install imageoptim
-brew cask install inkscape
-brew cask install vlc
 
 # misc
-brew cask install dnscrypt
-brew cask install flux
+brew cask install itsycal
 brew cask install osxfuse
 brew cask install spectacle
 brew cask install the-unarchiver
