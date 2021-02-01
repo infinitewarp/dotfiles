@@ -8,8 +8,8 @@ if ! which brew &> /dev/null; then
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi;
 
-# Tap the caskroom. See: https://caskroom.github.io/
-brew tap caskroom/cask
+# Tap the caskroom.
+# brew tap homebrew/cask-cask
 
 # Make sure we’re using the latest Homebrew.
 brew update
@@ -49,7 +49,6 @@ brew install git
 brew install gnupg
 brew install htop
 brew install httpie
-brew install pipenv
 brew install pstree
 brew install pv
 brew install socat  # netcat on steroids
@@ -91,7 +90,7 @@ brew cask install yujitach-menumeters
 # "nerd fonts" for extended glyphs in terminals
 # see: https://github.com/ryanoasis/nerd-fonts
 # and: https://github.com/ryanoasis/powerline-extra-symbols
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 brew cask install font-dejavusansmono-nerd-font
 
 # Remove outdated versions from the cellar.

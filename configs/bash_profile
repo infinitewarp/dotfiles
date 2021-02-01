@@ -1,5 +1,8 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+if [ -d "/Users/brasmith/Library/Python/3.7/bin" ]; then
+    export PATH="/Users/brasmith/Library/Python/3.7/bin:$PATH";
+fi
 
 # Check only once if brew is installed, and save the result.
 # Check this at the start *before* other dotfiles to they can use it.
@@ -49,7 +52,7 @@ if [[ $EXTRA_BASH_COMPLETION -eq 1 ]]; then
 fi
 
 # Add bin directory for Brew-installed version of Python to path
-if [[ $BREW_INSTALLED ]] && [ "$(which python)" == "${BREW_PREFIX}/bin/python" ]; then
+if [[ $BREW_INSTALLED ]] && [ "$(which python3)" == "${BREW_PREFIX}/bin/python3" ]; then
 	export PATH="${BREW_PREFIX}/opt/python/libexec/bin:$PATH"
 fi;
 

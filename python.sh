@@ -6,10 +6,10 @@ if [[ ! -z "$VIRTUAL_ENV" ]]; then
 fi
 
 
-if [[ $(which pip) == "$(brew --prefix)/opt/python/libexec/bin/pip" ]] &> /dev/null; then
-	pip install -U --user pip
-	pip install -U --user virtualenvwrapper virtualenv
-	pip install -U --user powerline-shell
+if [[ $(which pip3) == "$(brew --prefix)/opt/python/libexec/bin/pip3" ]] &> /dev/null; then
+	pip3 install -U --user pip
+	pip3 install -U --user virtualenvwrapper virtualenv pipenv
+	pip3 install -U --user powerline-shell
 else
 	echo "python must be installed by brew"
 	exit 1
