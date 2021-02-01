@@ -95,3 +95,14 @@ brew cask install font-dejavusansmono-nerd-font
 
 # Remove outdated versions from the cellar.
 brew cleanup --prune=7
+
+
+## TODO CLEANUP
+
+brew install vim coreutils chafa asciinema bash git python@3.8 python@3.9 httpie tree wget jq gnupg
+
+brew install bash gettext awscli postgresql openssl
+
+
+brew tap caskroom/fonts
+brew cask install font-dejavusansmono-nerd-font
