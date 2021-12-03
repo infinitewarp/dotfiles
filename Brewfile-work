@@ -1,0 +1,17 @@
+###
+# Extra things to install exclusively on my work machine
+
+###
+# CLI programs
+
+brew 'awscli'  # AWS CLI https://aws.amazon.com/cli/
+brew 'librdkafka'  # Kafka lib https://github.com/edenhill/librdkafka
+brew "openshift-cli"  # openshift CLI https://www.openshift.com/
+brew 'podman'  # libre docker alternative https://podman.io/
+
+###
+# desktop apps
+
+cask 'brave-browser'  # worse than Firefox but at least it's not Google https://brave.com/
+cask 'drawio'  # draw.io desktop app https://github.com/jgraph/drawio-desktop/
+cask 'jetbrains-toolbox'  # for PyCharm Professional and friends

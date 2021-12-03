@@ -1,101 +1,46 @@
 #!/usr/bin/env bash
 
-# Install command-line tools using Homebrew.
-# Not sure what some of these are? Check http://brewformulas.org/
+if [ ! -n $BASH_VERSION ] ; then
+    echo "Please run this script with bash."
+    exit 1
+fi
 
 # Install brew if it's not already
 if ! which brew &> /dev/null; then
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi;
 
-# Tap the caskroom. See: https://caskroom.github.io/
-brew tap caskroom/cask
+# Note: Before installing homebrew on a clean system, /usr/local/ exists but is empty.
+# Wiping that directly removes most of homebrew and its installations.
+# The official uninstall process is:
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+# Note that this does *not* uninstall files from formulae or casks that live outside /usr/local/.
+# You may want more aggressive commands like:
+# brew remove --force $(brew list --formula)
+# brew remove --cask --force $(brew list)
 
-# Make sure we’re using the latest Homebrew.
+# Update homebrew core.
 brew update
 
 # Upgrade any already-installed formulae.
 brew upgrade
 
-# Get newer bash because macOS default is woefully out of date.
-brew install bash
-# The new bash needs some trickery to make it available.
-if [ -f "$(brew --prefix)/bin/bash" ]; then
-    grep "$(brew --prefix)/bin/bash" /etc/shells || \
-        sudo sh -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
-    sudo chsh -s "$(brew --prefix)/bin/bash" "$USER"
-fi
+# Upgrade any already-installed casks.
+brew upgrade --cask
 
-# Handy bash completion helper
-brew install bash-completion
+# Maybe force casks that claim to auto-update?
+# brew upgrade --cask --greedy
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+# brew install vim --with-override-system-vi
 
-# Install more recent less with better utf-8 support (e.g. emoji in git commit messages)
-brew install less
+# Automatically install only the base Brewfile by default.
+# Manually install others using `brew bundle install --file=Brewfile.XYZ`
+SCRIPTDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+brew bundle install --file="${SCRIPTDIR}"/Brewfile --verbose
 
-# XQuartz is an implicit prerequisite for some packages (e.g. xpdf)
-brew cask install xquartz
+# Autoremove unnecessary installs.
+brew autoremove
 
-# # Install some CTF tools; see https://github.com/ctfs/write-ups.
-# brew install nmap
-# brew install pngcheck
-# brew install xpdf  # Note: Instead of xpdf, let's try poppler.
-brew install poppler
-
-# Install modern Python for development
-brew install python
-brew install python3
-
-# Install other useful binaries.
-brew install ack
-brew install git
-brew install gpg
-brew install htop
-brew install httpie
-brew install ssh-copy-id
-brew install the_silver_searcher
-brew install tree
-brew install jq
-brew install wget
-
-# Cask install various third-party packages
-
-## internet
-brew cask install firefox
-brew cask install google-chrome
-brew cask install slack
-
-# development
-brew cask install docker
-brew install docker-compose
-brew cask install iterm2
-brew cask install pycharm-ce
-brew cask install sublime-text
-brew cask install suspicious-package
-
-## media
-brew cask install handbrake
-brew cask install imagealpha
-brew cask install imageoptim
-brew cask install inkscape
-brew cask install vlc
-
-# misc
-brew cask install dnscrypt
-brew cask install flux
-brew cask install osxfuse
-brew cask install spectacle
-brew cask install the-unarchiver
-brew cask install veracrypt
-brew cask install yujitach-menumeters
-
-# "nerd fonts" for extended glyphs in terminals
-# see: https://github.com/ryanoasis/nerd-fonts
-# and: https://github.com/ryanoasis/powerline-extra-symbols
-brew tap caskroom/fonts
-brew cask install font-dejavusansmono-nerd-font
-
-# Remove outdated versions from the cellar.
+# Take out the trash.
 brew cleanup --prune=7

@@ -1,0 +1,41 @@
+###
+# Extra things to install exclusively on personal (not work) machines
+
+###
+# CLI programs
+
+brew 'borgbackup'  # deduplicating archiver https://borgbackup.org/
+brew 'brightness'  # CLI brightness control https://github.com/nriley/brightness
+brew 'ffmpeg'  # video/audio transcoder https://ffmpeg.org/
+brew 'libdvdcss'  # DVD reading lib https://www.videolan.org/developers/libdvdcss.html
+brew 'glances'  # top/htop alternative https://nicolargo.github.io/glances/
+brew 'iperf3'  # network benchmark tool https://github.com/esnet/iperf
+brew 'p7zip'  # 7-Zip https://github.com/jinfeihan57/p7zip
+brew 'rar'  # RAR/UnRAR archive tools https://www.rarlab.com/
+brew 'rclone'  # rsync for cloud storage https://rclone.org/
+brew 'fio'  # I/O and disk benchmark and stress test https://github.com/axboe/fio
+
+###
+# desktop apps
+
+cask 'balenaetcher'  # flash drive ISO/image writer https://balena.io/etcher
+cask 'blender'  # Blender 3D https://www.blender.org/
+cask 'docker'  # Docker https://www.docker.com/
+cask 'gas-mask'  # hosts file manager https://github.com/2ndalpha/gasmask http://clockwise.ee/
+cask 'makemkv'  # MakeMKV https://www.makemkv.com/
+cask 'obs'  # OBS Studio https://obsproject.com/
+cask 'pycharm-ce'  # PyCharm CE https://www.jetbrains.com/pycharm/
+cask 'veracrypt'  # crypto containers https://www.veracrypt.fr/
+cask 'virtualbox-extension-pack'  # Oracle VirtualBox Extension Pack https://www.virtualbox.org/
+cask 'virtualbox'  # Oracle VirtualBox https://www.virtualbox.org/
+cask 'vuescan'  # scanner software https://www.hamrick.com/
+
+tap 'heroku/brew'  # https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+brew 'heroku'  # heroku cli https://www.heroku.com/
+
+# no cask or anything for PureRef (gratis) or BeeRef (libre)?
+# https://github.com/rbreu/beeref/releases
+
+# cask 'littlesnitch'  # Little Snitch, but check the website for compatible version
+# latest version is https://www.obdev.at/products/littlesnitch/download.html
+# legacy for macOS 10.15 and older https://www.obdev.at/products/littlesnitch/download-previous-versions.html

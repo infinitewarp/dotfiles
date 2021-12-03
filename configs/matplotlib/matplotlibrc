@@ -1,3 +1,5 @@
+# ~/.matplotlib/matplotlibrc
+
 # necessary for brew+virtualenv+pip installed matplotlib
 # see: https://github.com/JuliaPy/PyCall.jl/issues/218#issuecomment-162279477
 # see: https://stackoverflow.com/a/21789908/6621995
