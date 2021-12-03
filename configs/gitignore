@@ -1,5 +1,7 @@
 # Compiled Python files
+__pycache__/
 *.py[cod]
+*$py.class
 
 # macOS folder metadata
 .DS_Store
@@ -13,6 +15,14 @@
 
 # Common SQLite dev db name
 dev.db
+*.sqlite3
 
 # JetBrains projects
 .idea
+
+# VS Code settings
+.vscode
+
+# .env files
+.env
+.env-*

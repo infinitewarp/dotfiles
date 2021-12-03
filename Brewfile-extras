@@ -1,0 +1,37 @@
+###
+# Extra things that I don't always install but may be useful
+
+brew 'docutils'  # reStructuredText processor https://docutils.sourceforge.io
+brew 'exiftool'  # read/write EXIF metadata https://exiftool.org
+brew 'figlet'  # ASCII art tool http://www.figlet.org/
+brew 'graphicsmagick'  # imagemagick alternative, maybe faster http://www.graphicsmagick.org/
+brew 'imagemagick'  # image processing tools https://imagemagick.org/index.php
+brew 'inetutils'  # GNU utilities for networking https://www.gnu.org/software/inetutils/
+brew 'minikube'  # Kubernetes cluster https://minikube.sigs.k8s.io/
+brew 'netcat'  # netcat http://netcat.sourceforge.net/
+brew 'pipenv'  # python dependency management https://github.com/pypa/pipenv
+brew 'speedtest-cli'  # speedtest.net CLI https://github.com/sivel/speedtest-cli
+brew 'sshuttle'  # poor man's VPN over ssh https://github.com/sshuttle/sshuttle
+brew 'tesseract'  # Tesseract OCR engine https://github.com/tesseract-ocr/
+brew 'toilet'  # Color alternative to figlet http://caca.zoy.org/wiki/toilet
+brew 'wrk'  # HTTP benchmark tool https://github.com/wg/wrk
+brew 'xmlto'  # Convert XML to another format https://pagure.io/xmlto/
+
+cask 'alfred'  # application launcher https://www.alfredapp.com/
+cask 'barrier'  # remote keyboard/mouse sharing https://github.com/debauchee/barrier/
+cask 'brave-browser'  # worse than Firefox but at least it's not Google https://brave.com/
+cask 'eloston-chromium'  # ungoogled Chromium https://github.com/Eloston/ungoogled-chromium
+cask 'gimp'  # GIMP not great but free https://www.gimp.org/
+cask 'grandperspective'  # disk usage visualizer https://grandperspectiv.sourceforge.io/
+cask 'horos'  # medical image viewer https://horosproject.org/
+cask 'kap'  # screen recorder https://getkap.co/
+cask 'krita'  # painting/sketching program https://krita.org/
+cask 'libreoffice'  # Office suite https://www.libreoffice.org/
+cask 'malwarebytes'  # malware scanner https://www.malwarebytes.com/mac/
+cask 'max'  # audio transcoder https://sbooth.org/Max/
+cask 'mcgimp'  # enchanced GIMP bundled with extra plugins https://www.partha.com/
+cask 'rectangle'  # window management https://rectangleapp.com/
+cask 'tunnelblick'  # OpenVPN client https://www.tunnelblick.net/
+
+# grandperspective > disk-inventory-x
+# cask 'disk-inventory-x'  # disk usage visualizer http://www.derlien.com/

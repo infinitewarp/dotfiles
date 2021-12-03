@@ -3,13 +3,37 @@
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
+	# View the current working tree status using the short format.
+	s = status -s
+
+	# Show the diff between the latest commit and the current state.
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+	# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
+	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
 	# Pull in remote changes for the current repository and all its submodules
-	p = !"git pull; git submodule foreach git pull origin master"
+	p = pull --recurse-submodules
+
+	# Clone a repository including all submodules.
+	c = clone --recursive
+
+	# Commit all changes.
+	ca = !git add -A && git commit -av
+
+	# Switch to a branch, creating it if necessary.
+	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
-	branches = branch -a
-	remotes = remote -v
+	branches = branch --all
+	remotes = remote --verbose
+
+	# List aliases.
+	aliases = config --get-regexp alias
+
+	# Amend the currently staged files to the latest commit.
+	amend = commit --amend --reuse-message=HEAD
 
 	# Credit an author on the latest commit
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
@@ -20,12 +44,27 @@
 	# Remove the old tag with this name and tag the latest commit with it.
 	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
 
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+
+	# Find tags containing commit
+	ft = "!f() { git describe --always --contains $1; }; f"
+
+	# Find commits by source code
+	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+	# Find commits by commit message
+	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
 	# Remove branches that have already been merged with master
 	# a.k.a. ‘delete merged’
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
 	# List contributors with number of commits
 	contributors = shortlog --summary --numbered
+
+	# Show the user email for the current repository.
+	whoami = config user.email
 
 	# Mercurial-like memorable "rollback" command.
 	# reset --soft will not update the working copy, preserving the committed change in it.
@@ -35,10 +74,28 @@
 	# Richer, full-history graph log
 	glog = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 
+	# Same as glog but without all
+	glogg = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)        %d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'"
+
+	# Garbage collect ALL the history!
+	# https://stackoverflow.com/a/14728706/6621995
+	gc-all = "-c gc.reflogExpire=0 -c gc.reflogExpireUnreachable=0 -c gc.rerereresolved=0  -c gc.rerereunresolved=0 -c gc.pruneExpire=now gc"
+
+	# Run a simple git:// server for the current repo.
+	server = daemon --listen=127.0.0.1 --reuseaddr --verbose --base-path=. --export-all ./.git
+
+	# Change the date on the latest commit
+	date = "!f() { GIT_COMMITTER_DATE=\"$1\" git commit --amend --no-edit --date \"$1\"; }; f"
+
 [apply]
 
 	# Detect whitespace errors when applying a patch
 	whitespace = fix
+
+[branch]
+
+	# Show most recently changed branches first.
+	sort = -committerdate
 
 [core]
 
@@ -58,6 +115,10 @@
 	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
 	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
 	precomposeunicode = false
+
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
 
 [color]
 
@@ -94,9 +155,6 @@
 
 	# Detect copies as well as renames
 	renames = copies
-	# Enable an experimental heuristic that shifts the hunk boundary in an
-	# attempt to make the resulting patch easier to read.
-	indentHeuristic = true
 
 [diff "bin"]
 
@@ -113,6 +171,11 @@
 	# Automatically correct and execute mistyped commands
 	autocorrect = 1
 
+[init]
+
+	# Set default branch name for new repos
+	defaultBranch = main
+
 [merge]
 
 	# Include summaries of merged commits in newly created merge commit messages
@@ -125,6 +188,9 @@
 
 [push]
 
+	# https://git-scm.com/docs/git-config#git-config-pushdefault
+	# https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
+	default = simple
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 
@@ -132,3 +198,9 @@
 
 	# More verbose list message for interactive rebasing.
 	instructionFormat = [%an @ %ar] %s
+
+[user]
+
+	name = John Doe
+	email = notfakemail@example.com
+	signingkey = 8BADF00DBABEDEADC0DE00000000000000000000

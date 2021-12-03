@@ -1,23 +1,32 @@
-#!/usr/bin/env bash
+# ~/.aliases
 
-# Shortcuts
-alias code="cd ~/projects"
+if [ -n "$BASH_VERSION" ] ; then
+	# bash-specific aliases and configs
+	# ls colors and aliases already included with oh-my-zsh
 
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-else # macOS `ls`
-	colorflag="-G"
+	# Detect which `ls` flavor is in use
+	if ls --color > /dev/null 2>&1; then # GNU `ls`
+		colorflag="--color"
+	else # macOS `ls`
+		colorflag="-G"
+	fi
+
+	# List all files colorized in long format
+	alias l="ls -lF ${colorflag}"
+
+	# List all files colorized in long format, including dot files
+	alias ll="ls -laF ${colorflag}"
+
+	# Always use color output for `ls`
+	alias ls="command ls ${colorflag}"
 fi
 
-# List all files colorized in long format
-alias l="ls -lF ${colorflag}"
-
-# List all files colorized in long format, including dot files
-alias ll="ls -laF ${colorflag}"
-
-# Always use color output for `ls`
-alias ls="command ls ${colorflag}"
+# fix potentially problematic availability of peen shims with brew commands
+# See the "OPTIONAL. To fix brew doctor's warning" explanation in:
+# https://github.com/pyenv/pyenv/blob/master/README.md#homebrew-in-macos
+if which brew &> /dev/null; then
+    alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+fi
 
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
@@ -41,19 +50,28 @@ alias dnsflush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 # Clean up LaunchServices to remove duplicates in the “Open With” menu
 alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
 
+# JavaScriptCore REPL
+jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
+[ -e "${jscbin}" ] && alias jsc="${jscbin}";
+unset jscbin;
+
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
 # Finally, clear download history from quarantine. https://mths.be/bum
 alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse as p; print(p.quote_plus(sys.argv[1]));"'
 
 # PlistBuddy alias, because sometimes `defaults` just doesn’t cut it
 alias plistbuddy="/usr/libexec/PlistBuddy"
 
 # Airport CLI alias
 alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+
+# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume output volume 100'"
 
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"

@@ -1,3 +1,5 @@
+# ~/.inputrc
+
 # GNU Readline manual:
 # https://cnswww.cns.cwru.edu/php/chet/readline/readline.html
 
@@ -31,5 +33,5 @@ set output-meta on
 set convert-meta off
 
 # Alt/Option/Meta + arrow left/right for word skip
-"\e\e[C": forward-word
-"\e\e[D": backward-word
+#"\e\e[C": forward-word
+#"\e\e[D": backward-word

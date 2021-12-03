@@ -1,68 +1,31 @@
 #!/usr/bin/env bash
 
-pushd "$(dirname "${BASH_SOURCE}")"
+if [ ! -n $BASH_VERSION ] ; then
+    echo "Please run this script with bash."
+    exit 1
+fi
 
-git pull origin master
+function makeitso {
+    local SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+    if [ "$(uname)" == "Darwin" ]; then
+        if ! xcode-select -p &>/dev/null; then
+            xcode-select --install
+            while ! xcode-select -p &>/dev/null; do
+                echo "Waiting for developer tools to install."
+                sleep 5
+            done
+        else
+            echo "Apple developer tools are already installed at $(xcode-select -p)"
+        fi
+    fi
 
-function rcopy() {
-    rsync -ah --no-perms $1 $2
-}
+    /bin/bash "${SCRIPTPATH}"/shell.sh
 
-function macthings() {
-    source ./brew.sh
-    source ./python.sh
-    source ./macos.sh
-}
+    if [ "$(uname)" == "Darwin" ]; then
+        /bin/bash "${SCRIPTPATH}"/brew.sh
+        /bin/bash "${SCRIPTPATH}"/macos.sh
+    fi
 
-function dotfiles() {
-    # shell
-    rcopy "configs/aliases" ~/.aliases
-    rcopy "configs/bash_profile" ~/.bash_profile
-    rcopy "configs/bash_prompt" ~/.bash_prompt
-    rcopy "configs/bashrc" ~/.bashrc
-    rcopy "configs/exports" ~/.exports
-    rcopy "configs/functions" ~/.functions
-    rcopy "configs/inputrc" ~/.inputrc
-
-    # ack (is better than grep)
-    rcopy "configs/ackrc" ~/.ackrc
-
-    # curl
-    rcopy "configs/curlrc" ~/.curlrc
-
-    # editorconfig
-    rcopy "configs/editorconfig" ~/.editorconfig
-
-    # git
-    rcopy "configs/gitattributes" ~/.gitattributes
-    rcopy "configs/gitconfig" ~/.gitconfig
-    rcopy "configs/gitignore" ~/.gitignore
-
-    # python
-    rcopy "configs/pystartup.py" ~/.pystartup.py
-    # python matplotlib
-    mkdir -p ~/.matplotlib
-    rcopy "configs/matplotlibrc" ~/.matplotlib/matplotlibrc
-
-    # screen
-    rcopy "configs/screenrc" ~/.screenrc
-
-    # vim
-    rcopy "configs/vimrc" ~/.vimrc
-    rcopy "configs/vim/" ~/.vim
-
-    # wget
-    rcopy "configs/wgetrc" ~/.wgetrc
-
-    # personal bins
-    rcopy "configs/bin" ~/
-
-    source ~/.bash_profile;
-}
-
-function makeitso() {
-    dotfiles
-    [ "$(uname)" == "Darwin" ] && macthings
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -75,12 +38,7 @@ else
     fi
 fi
 
-unset makeitso
-unset dotfiles
-unset macthings
-unset rcopy
-
-popd
+unset -f makeitso
 
 echo "** Installation complete!"
 echo "** Please close your terminal and restart for settings to take effect."

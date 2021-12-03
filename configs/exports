@@ -1,28 +1,46 @@
-#!/usr/bin/env bash
+# ~/.exports
 
 # Make vim the default editor.
-export EDITOR='vim';
+export EDITOR='vim'
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
-export PYTHONIOENCODING='UTF-8';
+export PYTHONIOENCODING='UTF-8'
 # Use custom startup script for Python to improve the REPL.
-export PYTHONSTARTUP="${HOME}/.pystartup.py";
-
-# Increase Bash history size. Allow 32³ entries; the default is 500.
-export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
-# Omit duplicates and commands that begin with a space from history.
-export HISTCONTROL='ignoreboth';
+export PYTHONSTARTUP="${HOME}/.pystartup.py"
 
 # Prefer US English and use UTF-8.
-export LANG='en_US.UTF-8';
-export LC_ALL='en_US.UTF-8';
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
 
 # Highlight section titles in manual pages.
-export LESS_TERMCAP_md="${yellow}";
+export LESS_TERMCAP_md="${yellow}"
 
-# After each command, append to the history file (but don't reread it).
-export PROMPT_COMMAND="history -a; ${PROMPT_COMMAND}"
+# More useful default args for less. `man 1 less` for more options.
+# I: ignore case when searching
+# F: exit if the entire file can be displayed on the first screen
+# R: enable ANSI color escape sequences
+# X: don’t clear screen on exit
+export LESS="IFRX"
 
 # Necessary for lots of GPG tooling to work, especially when redirecting stdin/stdout.
-export GPG_TTY=$(tty)
+# If git can't sign commits, double check that GPG_TTY was set and exported correctly.
+[ -n "ZSH_VERSION" ] && export GPG_TTY=$TTY || export GPG_TTY=$(tty)
+
+# load pyenv vars and functions into the environment
+eval "$(pyenv init -)"
+
+if [ -n "$BASH_VERSION" ] ; then
+    # bash-specific exports
+
+    # Increase Bash history size. Allow 32³ entries; the default is 500.
+    export HISTSIZE='32768'
+    export HISTFILESIZE="${HISTSIZE}"
+    # Omit duplicates and commands that begin with a space from history.
+    export HISTCONTROL='ignoreboth'
+
+    # After each command, append to the history file (but don't reread it).
+    export PROMPT_COMMAND="history -a; ${PROMPT_COMMAND}"
+elif [ -n "$ZSH_VERSION" ] ; then
+    # zsh-specific exports
+    # nothing yet...
+fi

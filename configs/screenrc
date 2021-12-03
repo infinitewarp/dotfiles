@@ -1,3 +1,5 @@
+# ~/.screenrc
+
 # Disable the startup message
 startup_message off
 
@@ -20,5 +22,5 @@ hardstatus string '[ %{Y}%H %{g}][%{W}%= %?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{
 caption always
 
 # Easier to remember screen navigation
-bindkey ^, prev
-bindkey ^. next
+# bindkey ^, prev
+# bindkey ^. next

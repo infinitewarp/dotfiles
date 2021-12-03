@@ -1,3 +1,5 @@
+" ~/.vimrc
+
 " Use the Molokai theme (port of monokai)
 " https://github.com/tomasr/molokai
 colorscheme molokai
@@ -78,8 +80,8 @@ noremap <leader>W :w !sudo tee % > /dev/null<CR>
 if has("autocmd")
 	" Enable file type detection
 	filetype on
-	" Treat .json files as .js
-	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
+	" Treat .json files as JSON
+	autocmd BufNewFile,BufRead *.json setfiletype json syntax=json
 	" Treat .md files as Markdown
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 endif
