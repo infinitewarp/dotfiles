@@ -81,3 +81,7 @@ alias reload="exec $SHELL -l"
 
 # Print each PATH entry on a separate line
 alias paths='echo -e ${PATH//:/\\n}'
+
+# Clear all "Recent Places" in open/save dialogs
+alias clearrecent='defaults delete -g NSNavRecentPlaces'
+# Also consider "defaults write -g NSNavRecentPlacesLimit -int 0" to forbid any recent places.
