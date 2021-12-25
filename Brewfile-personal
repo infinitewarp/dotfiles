@@ -10,6 +10,7 @@ brew 'ffmpeg'  # video/audio transcoder https://ffmpeg.org/
 brew 'libdvdcss'  # DVD reading lib https://www.videolan.org/developers/libdvdcss.html
 brew 'glances'  # top/htop alternative https://nicolargo.github.io/glances/
 brew 'iperf3'  # network benchmark tool https://github.com/esnet/iperf
+brew 'par2'  # parity archive tool https://github.com/Parchive/par2cmdline
 brew 'p7zip'  # 7-Zip https://github.com/jinfeihan57/p7zip
 brew 'rar'  # RAR/UnRAR archive tools https://www.rarlab.com/
 brew 'rclone'  # rsync for cloud storage https://rclone.org/
@@ -23,7 +24,9 @@ cask 'blender'  # Blender 3D https://www.blender.org/
 cask 'docker'  # Docker https://www.docker.com/
 cask 'gas-mask'  # hosts file manager https://github.com/2ndalpha/gasmask http://clockwise.ee/
 cask 'makemkv'  # MakeMKV https://www.makemkv.com/
+cask 'minecraft'  # Minecraft https://minecraft.net/
 cask 'obs'  # OBS Studio https://obsproject.com/
+cask 'oracle-jdk'  # Oracle Java runtime/JDK https://www.oracle.com/downloads/licenses/no-fee-license.html
 cask 'pycharm-ce'  # PyCharm CE https://www.jetbrains.com/pycharm/
 cask 'veracrypt'  # crypto containers https://www.veracrypt.fr/
 cask 'virtualbox-extension-pack'  # Oracle VirtualBox Extension Pack https://www.virtualbox.org/
